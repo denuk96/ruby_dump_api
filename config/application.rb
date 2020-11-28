@@ -27,7 +27,7 @@ module RubyDumpApi
     config.active_job.queue_adapter = :sidekiq
 
     config.eager_load_paths << Rails.root.join('lib')
-
-    Rails.application.config.hosts << Rails.application.credentials[Rails.env.to_sym][:host_name] # new in rails 6
+    config.hosts = nil
+    # Rails.application.config.hosts << Rails.application.credentials[Rails.env.to_sym][:host_name] # new in rails 6
   end
 end

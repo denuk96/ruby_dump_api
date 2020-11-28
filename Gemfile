@@ -12,18 +12,18 @@ gem 'hiredis'
 # == background ==
 gem 'sidekiq', '~> 5.2'
 gem 'sidekiq-cron', '~> 1.2'
+# == api doc ==
+gem 'rswag'
 # == other ==
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'jwt'
+gem 'rack-cors'
 
 
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
-
-
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'database_cleaner'
