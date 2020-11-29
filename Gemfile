@@ -26,7 +26,6 @@ gem 'rack-cors'
 # gem 'image_processing', '~> 1.2'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails', '~> 3.9'
