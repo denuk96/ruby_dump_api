@@ -12,14 +12,14 @@ class Api::V1::UsersController < Api::V1::ApiController
   def sign_in
     user = User.find_by(email: params[:email])
     if user&.authenticate(params[:password])
-      render json: { user: user, token: create_token(user.id) }, status: 200
+      render json: user, scope: { token: create_token(user.id) }, status: 200
     else
       render json: { error: 'Invalid email or password' }, status: 401
     end
   end
 
   def auto_login
-    render json: { user: @current_user }, status: :ok
+    render json: @current_user, status: 200
   end
 
   private
