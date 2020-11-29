@@ -30,8 +30,51 @@ paths:
               required:
               - email
               - password
+  "/api/v1/auth/sign-in":
+    post:
+      summary: Login user
+      tags:
+      - Authorization
+      parameters: []
+      responses:
+        '200':
+          description: sign in user
+          content: {}
+        '401':
+          description: doesnt create
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/api/v1/auth/auto-login":
+    post:
+      summary: auto login
+      tags:
+      - Authorization
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: return user
+          content: {}
+        '401':
+          description: doesnt create
+          content: {}
 servers:
-- url: https://{defaultHost}
+- url: http://localhost:3000
   variables:
     defaultHost:
       default: localhost:3000

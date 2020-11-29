@@ -1,4 +1,4 @@
-class JvtAuthorize
+class JvtAuthorizer
   def initialize(auth_header)
     @auth_header = auth_header
   end
@@ -6,7 +6,7 @@ class JvtAuthorize
   def authorize
     if (play_load = decode_token)
       user_id = play_load[0]['user_id']
-      User.find user_id
+      User.find_by(id: user_id)
     end
   end
 
@@ -14,9 +14,8 @@ class JvtAuthorize
 
   def decode_token
     if @auth_header
-      token = @auth_header.split(' ')[1]
       begin
-        JvtCoder.decode(token)
+        JvtCoder.decode(@auth_header)
       rescue JWT::DecodeError
         nil
       end

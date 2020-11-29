@@ -1,19 +1,34 @@
 class Api::V1::UsersController < Api::V1::ApiController
-  skip_before_action :authorize!
+  skip_before_action :authorize!, except: :auto_login
 
   def create
     if (user = User.create(user_params)).valid?
-      token = JvtCoder.encode({ user_id: user.id })
-
-      render json: { user: user, token: token }, status: 200
+      render json: { user: user, token: create_token(user.id) }, status: 200
     else
       render json: { error: 'Invalid email or password' }, status: 409
     end
+  end
+
+  def sign_in
+    user = User.find_by(email: params[:email])
+    if user&.authenticate(params[:password])
+      render json: { user: user, token: create_token(user.id) }, status: 200
+    else
+      render json: { error: 'Invalid email or password' }, status: 401
+    end
+  end
+
+  def auto_login
+    render json: { user: @current_user }, status: :ok
   end
 
   private
 
   def user_params
     params.permit(:email, :password)
+  end
+
+  def create_token(user_id)
+    JvtCoder.encode({ user_id: user_id })
   end
 end
