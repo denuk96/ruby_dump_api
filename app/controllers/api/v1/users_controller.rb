@@ -3,7 +3,7 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   def create
     if (user = User.create(user_params)).valid?
-      render json: { user: user, token: create_token(user.id) }, status: 200
+      render json: user, scope: { token: create_token(user.id) }, status: 200
     else
       render json: { error: 'Invalid email or password' }, status: 409
     end
