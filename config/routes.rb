@@ -9,6 +9,8 @@ Rails.application.routes.draw do
         post 'sign-in', to: 'users#sign_in'
         get 'auto-login', to: 'users#auto_login'
       end
+      resources :categories, only: %w[create update destroy]
+      resources :posts, only: %w[index create update destroy]
     end
   end
 end

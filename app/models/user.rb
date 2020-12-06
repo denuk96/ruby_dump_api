@@ -11,6 +11,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :posts, dependent: :destroy
+
   validates_presence_of :email, :password_digest
   validates_uniqueness_of :email
 end

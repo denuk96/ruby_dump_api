@@ -73,6 +73,48 @@ paths:
         '401':
           description: doesnt create
           content: {}
+  "/api/v1/posts":
+    get:
+      summary: List of posts
+      tags:
+      - Posts
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: list of teams shown
+          content: {}
+    post:
+      summary: Create post
+      tags:
+      - Posts
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: return user
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: integer
+                title:
+                  type: string
+                body:
+                  type: string
+              required:
+              - title
+              - body
 servers:
 - url: http://localhost:3000
   variables:
