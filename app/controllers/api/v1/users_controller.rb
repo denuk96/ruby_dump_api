@@ -19,7 +19,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   end
 
   def auto_login
-    render json: @current_user, status: 200
+    render json: @current_user, scope: { token: create_token(@current_user.id) }, status: 200
   end
 
   private
