@@ -3,8 +3,8 @@ class Api::V1::ApiController < ActionController::API
 
   private
   def authorize!
-    unless (@current_user = JvtAuthorizer.new(request.headers['Authorization']).authorize)
-      render json: { message: 'You have to authenticate to access this page.' }, status: :unprocessable_entity
+    unless (@current_user = JvtAuthorizer.new(request.headers["Authorization"]).authorize)
+      render json: { message: "You have to authenticate to access this page." }, status: :unprocessable_entity
     end
   end
 end

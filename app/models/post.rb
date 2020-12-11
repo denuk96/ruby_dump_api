@@ -22,5 +22,5 @@ class Post < ApplicationRecord
   validates_presence_of :title, :body
   validates_uniqueness_of :title
   validates :title, length: 3..40
-  validates :body, length: {minimum: 5}
+  validates :body, length: { minimum: 5}
 end

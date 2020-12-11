@@ -45,7 +45,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
 
       response "422", "invalid request" do
         let(:Authorization) { JvtCoder.encode("#{FactoryBot.create(:user).id}") }
-        let(:post_params) {{ title: '' }}
+        let(:post_params) {{ title: "" }}
         run_test!
       end
     end

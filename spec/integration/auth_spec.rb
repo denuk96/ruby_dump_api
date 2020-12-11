@@ -1,10 +1,10 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Authorization API' do
-  path '/api/v1/auth/sign-up' do
-    post 'creates User' do
-      tags 'Authorization'
-      consumes 'application/json'
+describe "Authorization API" do
+  path "/api/v1/auth/sign-up" do
+    post "creates User" do
+      tags "Authorization"
+      consumes "application/json"
 
       parameter name: :user, in: :body, schema: {
         type: :object,
@@ -15,22 +15,22 @@ describe 'Authorization API' do
         required: %w[email password]
       }
 
-      response '200', 'Creates user' do
-        let(:user) { { email: "user-#{rand(30000)}@factory.com", password: 'qweqwe123' } }
+      response "200", "Creates user" do
+        let(:user) { { email: "user-#{rand(30000)}@factory.com", password: "qweqwe123" } }
         run_test!
       end
 
-      response '409', 'doesnt create' do
-        let(:user) { '' }
+      response "409", "doesnt create" do
+        let(:user) { "" }
         run_test!
       end
     end
   end
 
-  path '/api/v1/auth/sign-in' do
-    post 'Login user' do
-      tags 'Authorization'
-      consumes 'application/json'
+  path "/api/v1/auth/sign-in" do
+    post "Login user" do
+      tags "Authorization"
+      consumes "application/json"
 
       parameter name: :user, in: :body, schema: {
           type: :object,
@@ -41,32 +41,32 @@ describe 'Authorization API' do
           required: %w[email password]
       }
 
-      response '200', 'sign in user' do
+      response "200", "sign in user" do
         let(:current_user) { FactoryBot.create(:user) }
-        let(:user) {{ email: current_user.email, password: current_user.password }}
+        let(:user) { { email: current_user.email, password: current_user.password }}
         run_test!
       end
 
-      response '401', 'doesnt create' do
+      response "401", "doesnt create" do
         let(:current_user) { FactoryBot.create(:user) }
-        let(:user) { { email: current_user.email, password: 'invalid_password' } }
+        let(:user) { { email: current_user.email, password: "invalid_password" } }
         run_test!
       end
     end
   end
 
-  path '/api/v1/auth/auto-login' do
-    get 'auto login' do
-      tags 'Authorization'
-      consumes 'application/json'
-      parameter name: 'Authorization', in: :header, type: :string
+  path "/api/v1/auth/auto-login" do
+    get "auto login" do
+      tags "Authorization"
+      consumes "application/json"
+      parameter name: "Authorization", in: :header, type: :string
 
-      response '200', 'return user' do
+      response "200", "return user" do
         let(:Authorization) { JvtCoder.encode("#{FactoryBot.create(:user).id}") }
         run_test!
       end
 
-      response '422', 'doesnt create' do
+      response "422", "doesnt create" do
         let(:'Authorization') { "" }
         run_test!
       end
