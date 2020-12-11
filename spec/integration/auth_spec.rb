@@ -5,6 +5,7 @@ describe 'Authorization API' do
     post 'creates User' do
       tags 'Authorization'
       consumes 'application/json'
+
       parameter name: :user, in: :body, schema: {
         type: :object,
         properties: {
@@ -13,10 +14,9 @@ describe 'Authorization API' do
         },
         required: %w[email password]
       }
-      # parameter name: 'Authorization', in: :header, type: :string
 
       response '200', 'Creates user' do
-        let(:user) { { email: 'email', password: 'bar' } }
+        let(:user) { { email: "user-#{rand(30000)}@factory.com", password: 'qweqwe123' } }
         run_test!
       end
 
@@ -31,6 +31,7 @@ describe 'Authorization API' do
     post 'Login user' do
       tags 'Authorization'
       consumes 'application/json'
+
       parameter name: :user, in: :body, schema: {
           type: :object,
           properties: {
@@ -39,39 +40,34 @@ describe 'Authorization API' do
           },
           required: %w[email password]
       }
-      # parameter name: 'Authorization', in: :header, type: :string
 
       response '200', 'sign in user' do
-        user = FactoryBot.create(:user)
-        let(:user) { { email: user.email, password: '123456' } }
+        let(:current_user) { FactoryBot.create(:user) }
+        let(:user) {{ email: current_user.email, password: current_user.password }}
         run_test!
       end
 
       response '401', 'doesnt create' do
-        user = FactoryBot.create(:user)
-        let(:user) { { email: user.email, password: 'invalid_password' } }
+        let(:current_user) { FactoryBot.create(:user) }
+        let(:user) { { email: current_user.email, password: 'invalid_password' } }
         run_test!
       end
     end
   end
 
   path '/api/v1/auth/auto-login' do
-    post 'auto login' do
+    get 'auto login' do
       tags 'Authorization'
       consumes 'application/json'
       parameter name: 'Authorization', in: :header, type: :string
 
       response '200', 'return user' do
-        user = FactoryBot.create(:user)
-        token = JvtCoder.encode({ user_id: user.id })
-
-        let(:'Authorization') { token }
+        let(:Authorization) { JvtCoder.encode("#{FactoryBot.create(:user).id}") }
         run_test!
       end
 
-      response '401', 'doesnt create' do
-        token = JvtCoder.encode({ user_id: 'invalid-token' })
-        let(:'Authorization') { token }
+      response '422', 'doesnt create' do
+        let(:'Authorization') { "" }
         run_test!
       end
     end

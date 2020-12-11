@@ -31,7 +31,17 @@ RSpec.configure do |config|
             }
           }
         }
-      ]
+      ],
+      components: {
+        securitySchemes: {
+          ApiKeyAuth: {
+            type: :apiKey,
+            name: "Authorization",
+            in: :header,
+            description: "{token}"
+          }
+        }
+      }
     }
   }
 

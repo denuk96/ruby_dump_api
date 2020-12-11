@@ -9,6 +9,6 @@
 #
 FactoryBot.define do
   factory :category do
-    name { "" }
+    name { "Somecategory#{rand(20000)}" }
   end
 end
