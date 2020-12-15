@@ -1,8 +1,8 @@
 class Api::V1::PostsController < Api::V1::ApiController
-  # skip_before_action :authorize!
+  skip_before_action :authorize!, only: :index
 
   def index
-    post = Post.order(created_at: :desc)
+    post = Post.preload(:category).order(created_at: :desc)
     render json: post, status: :ok
   end
 
