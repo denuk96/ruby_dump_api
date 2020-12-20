@@ -31,7 +31,17 @@ RSpec.configure do |config|
             }
           }
         }
-      ]
+      ],
+      components: {
+        securitySchemes: {
+          api_key: {
+            type: :apiKey,
+            name: 'Authorization',
+            in: :header,
+            require: false
+          }
+        }
+      }
     }
   }
 

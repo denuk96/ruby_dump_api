@@ -8,4 +8,16 @@ class Api::V1::ApiController < ActionController::API
       render json: { message: 'Please log in' }, status: 401
     end
   end
+
+  # overrides default current_user method to @current_user object
+  def current_ability
+    @current_ability ||= Ability.new(@current_user)
+  end
+
+  # handle unauthorized access
+  rescue_from CanCan::AccessDenied do |exception|
+    respond_to do |format|
+      format.json { head :forbidden, content_type: 'text/html', json: exception }
+    end
+  end
 end

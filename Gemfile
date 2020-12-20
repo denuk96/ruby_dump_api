@@ -14,6 +14,8 @@ gem 'sidekiq', '~> 5.2'
 gem 'sidekiq-cron', '~> 1.2'
 # == api doc ==
 gem 'rswag'
+# == permissions control ==
+gem 'cancancan'
 # == other ==
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'bcrypt', '~> 3.1.7'

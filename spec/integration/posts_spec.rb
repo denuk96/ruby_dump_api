@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-describe 'Authorization API' do
+describe 'POSTS' do
   path '/api/v1/posts' do
     get 'List of posts' do
       tags 'Posts'
@@ -14,6 +14,7 @@ describe 'Authorization API' do
                    items: {
                      type: :object,
                      properties: {
+                       id: { type: :integer },
                        user_id: { type: :integer },
                        title: { type: :string },
                        body: { type: :string },
@@ -29,6 +30,8 @@ describe 'Authorization API' do
     post 'Create post' do
       tags 'Posts'
       consumes 'application/json'
+      security [token: {}]
+
 
       parameter name: :'Authorization', in: :header, type: :string
 
@@ -42,7 +45,7 @@ describe 'Authorization API' do
         required: %w[title body]
       }
 
-      response '200', 'return user' do
+      response '200', 'return post' do
         user = FactoryBot.create(:user)
         post = FactoryBot.create(:post)
         token = JvtCoder.encode({ user_id: user.id })
