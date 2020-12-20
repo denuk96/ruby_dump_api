@@ -19,7 +19,6 @@ describe 'Authorization API' do
         let(:user) { { email: 'email', password: 'bar' } }
         run_test!
       end
-
       response '409', 'doesnt create' do
         let(:user) { '' }
         run_test!
@@ -56,7 +55,7 @@ describe 'Authorization API' do
   end
 
   path '/api/v1/auth/auto-login' do
-    post 'auto login' do
+    get 'auto login' do
       tags 'Authorization'
       consumes 'application/json'
       parameter name: 'Authorization', in: :header, type: :string

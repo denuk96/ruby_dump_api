@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
-gem 'rails', '~> 6'
+gem 'rails', '~> 6.1'
 
 # == default ==
 gem 'pg', '~> 1.2', '>= 1.2.3'
@@ -28,7 +28,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'rspec-rails', '~> 3.9'
+  gem 'rspec-rails'
 end
 
 group :development do
