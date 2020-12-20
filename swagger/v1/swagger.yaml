@@ -73,29 +73,21 @@ paths:
         '401':
           description: doesnt create
           content: {}
-  "/api/v1/posts":
-    get:
-      summary: List of posts
-      tags:
-      - Posts
-      responses:
-        '200':
-          description: list of teams shown
-          content: {}
+  "/api/v1/categories":
     post:
-      summary: Create post
+      summary: Create category
       tags:
-      - Posts
+      - Categories
       security:
-      - token: {}
+      - ApiKeyAuth: []
       parameters:
       - name: Authorization
         in: header
         schema:
           type: string
       responses:
-        '200':
-          description: return post
+        '201':
+          description: category created
           content: {}
         '422':
           description: invalid request
@@ -106,15 +98,174 @@ paths:
             schema:
               type: object
               properties:
-                category_id:
-                  type: integer
+                name:
+                  type: string
+              required:
+              - name
+  "/api/v1/categories/{id}":
+    patch:
+      summary: Update category
+      tags:
+      - Categories
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: category updated
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+              - name
+    delete:
+      summary: Delete category
+      tags:
+      - Categories
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: no_content
+          content: {}
+  "/api/v1/posts":
+    get:
+      summary: 'Index posts '
+      tags:
+      - Posts
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: All posts
+          content: {}
+    post:
+      summary: Create post
+      tags:
+      - Posts
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '201':
+          description: post created
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
                 title:
                   type: string
                 body:
                   type: string
+                user_id:
+                  type: integer
               required:
               - title
               - body
+              - user_id
+  "/api/v1/posts/{id}":
+    patch:
+      summary: Update post
+      tags:
+      - Posts
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Post updated
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+                user_id:
+                  type: integer
+              required:
+              - title
+              - body
+              - user_id
+    delete:
+      summary: Delete post
+      tags:
+      - Posts
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: no_content
+          content: {}
 servers:
 - url: http://localhost:3000
   variables:
@@ -122,8 +273,8 @@ servers:
       default: localhost:3000
 components:
   securitySchemes:
-    api_key:
+    ApiKeyAuth:
       type: apiKey
       name: Authorization
       in: header
-      require: false
+      description: "{token}"

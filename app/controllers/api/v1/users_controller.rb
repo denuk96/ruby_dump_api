@@ -5,7 +5,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     if (user = User.create(user_params)).valid?
       render json: user, scope: { token: create_token(user.id) }, status: 200
     else
-      render json: { error: 'Invalid email or password' }, status: 409
+      render json: { error: "Invalid email or password" }, status: 409
     end
   end
 
@@ -14,7 +14,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     if user&.authenticate(params[:password])
       render json: user, scope: { token: create_token(user.id) }, status: 200
     else
-      render json: { error: 'Invalid email or password' }, status: 401
+      render json: { error: "Invalid email or password" }, status: 401
     end
   end
 
@@ -23,7 +23,6 @@ class Api::V1::UsersController < Api::V1::ApiController
   end
 
   private
-
   def user_params
     params.permit(:email, :password)
   end

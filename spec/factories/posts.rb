@@ -19,7 +19,7 @@ FactoryBot.define do
   factory :post do
     title { "some title#{rand(30000)}" }
     body { "MyText" }
-    category { nil }
-    user_id { User.first.id }
+    association :category
+    association :user
   end
 end

@@ -7,7 +7,7 @@ class JvtCoder
     end
 
     def decode(token)
-      JWT.decode(token, DECODING_JWT_KEY, true, algorithm: 'HS256')
+      JWT.decode(token, DECODING_JWT_KEY, true, algorithm: "HS256")
     end
   end
 end
