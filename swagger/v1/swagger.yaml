@@ -61,6 +61,8 @@ paths:
       summary: auto login
       tags:
       - Authorization
+      security:
+      - ApiKeyAuth: []
       parameters:
       - name: Authorization
         in: header
@@ -265,6 +267,15 @@ paths:
       responses:
         '204':
           description: no_content
+          content: {}
+  "/api/v1/first-load-resources":
+    get:
+      summary: 'Index posts '
+      tags:
+      - First Load resources
+      responses:
+        '200':
+          description: All resources
           content: {}
 servers:
 - url: http://localhost:3000

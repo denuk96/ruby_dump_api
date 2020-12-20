@@ -59,6 +59,7 @@ describe "Authorization API" do
     get "auto login" do
       tags "Authorization"
       consumes "application/json"
+      security [{ ApiKeyAuth: [] }]
       parameter name: "Authorization", in: :header, type: :string
 
       response "200", "return user" do
