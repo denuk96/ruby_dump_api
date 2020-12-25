@@ -1,5 +1,6 @@
 class Api::V1::CategoriesController < Api::V1::ApiController
-  before_action :set_category, except: :create
+  skip_before_action :authorize_user!, except: %i[create update destroy]
+  before_action :set_category, except: [:create]
 
   def create
     if (@category = Category.create(category_params)).valid?

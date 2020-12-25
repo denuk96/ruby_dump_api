@@ -1,8 +1,7 @@
 class Api::V1::ApiController < ActionController::API
-  before_action :authorize!
+  before_action :authorize_user!
 
-  private
-  def authorize!
+  def authorize_user!
     unless (@current_user = JvtAuthorizer.new(request.headers["Authorization"]).authorize)
       render json: { message: "You have to authenticate to access this page." }, status: 401
     end
@@ -15,8 +14,6 @@ class Api::V1::ApiController < ActionController::API
 
   # handle unauthorized access
   rescue_from CanCan::AccessDenied do |exception|
-    respond_to do |format|
-      format.json { head :forbidden, content_type: "text/html", json: exception }
-    end
+    render json: { error: "Access denied" }, status: 403
   end
 end

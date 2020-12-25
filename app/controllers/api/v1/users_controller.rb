@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::ApiController
-  skip_before_action :authorize!, except: :auto_login
+  skip_before_action :authorize_user!, except: :auto_login
 
   def create
     if (user = User.create(user_params)).valid?

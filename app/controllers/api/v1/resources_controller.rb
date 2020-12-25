@@ -1,5 +1,5 @@
 class Api::V1::ResourcesController < Api::V1::ApiController
-  skip_before_action :authorize!
+  skip_before_action :authorize_user!
 
   def load
     posts = Post.all.order(created_at: :desc)

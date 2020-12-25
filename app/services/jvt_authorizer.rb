@@ -5,7 +5,7 @@ class JvtAuthorizer
 
   def authorize
     if (play_load = decode_token)
-      user_id = play_load[0]
+      user_id = play_load[0]['user_id']
       User.find_by(id: user_id)
     end
   end
