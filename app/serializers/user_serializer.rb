@@ -9,7 +9,7 @@
 #  updated_at      :datetime         not null
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :email
+  attributes :id, :email
 
   attribute :access_token do
     scope[:token] if scope && scope[:token].present?
