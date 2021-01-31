@@ -1,23 +1,21 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: <%= Rails.application.credentials[Rails.env.to_sym][:db_user_name] %>
-  password: <%= Rails.application.credentials[Rails.env.to_sym][:db_password] %>
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %> # https://guides.rubyonrails.org/configuring.html#database-pooling
-  host: localhost # DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase" https://guides.rubyonrails.org/configuring.html#configuring-a-database
+  host: <%= ENV['DATABASE_HOST'] %> # localhost DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase" https://guides.rubyonrails.org/configuring.html#configuring-a-database
   port: 5432 # The TCP port the server listens on. Defaults to 5432.
 
 development:
   <<: *default
-  database: ruby_dump_dev
 
 test:
   <<: *default
-  database: ruby_dump_test
 
 production:
   <<: *default
-  database: ruby_dump_production
 
 #  DATABASE_URL="postgres://denuk96:denuk96@localhost/ruby_dump_development"
 
