@@ -31,3 +31,4 @@ services:
 volumes:
   gem_cache:
   db_data:
+
