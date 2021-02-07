@@ -1,6 +1,6 @@
 FROM ruby:2.7.2-alpine
 ENV BUNDLER_VERSION=2.1.4
-RUN chmod +x entrypoints/docker-entrypoint.sh
+#RUN chmod +x entrypoints/docker-entrypoint.sh
 RUN apk update && apk add gcc libc-dev make git libffi-dev openssl-dev python3-dev libxml2-dev libxslt-dev
 RUN apk add --update --no-cache \
       binutils-gold \
@@ -35,6 +35,6 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle config build.nokogiri --use-system-libraries
 RUN bundle check || bundle install
 
-COPY ../.. ./
+COPY . ./
 
 ENTRYPOINT ["sh", "entrypoints/docker-entrypoint.sh"]

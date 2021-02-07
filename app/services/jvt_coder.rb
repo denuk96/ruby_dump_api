@@ -1,5 +1,5 @@
 class JvtCoder
-  DECODING_JWT_KEY = Rails.application.credentials[Rails.env.to_sym][:jwt_secret]
+  DECODING_JWT_KEY = ENV['jwt_secret']
 
   class << self
     def encode(payload)

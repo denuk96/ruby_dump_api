@@ -33,8 +33,7 @@ Rails.application.configure do
 
   # caching
   config.action_controller.perform_caching = true
-  config.cache_store = :redis_cache_store, { driver: :hiredis,
-                                             url: Rails.application.credentials[Rails.env.to_sym][:redis_url] }
+  config.cache_store = :redis_cache_store, { driver: :hiredis, url: ENV['REDIS_URL'] }
 
   # filtering
   config.filter_parameters = []
