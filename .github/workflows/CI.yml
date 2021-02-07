@@ -25,8 +25,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: pull master
-        run: git pull https://github.com/denuk96/ruby_dump_api.git
+      - name: set env vars
+        run: cp /home/ubuntu/ruby_dump_vars/.env .env
          
       - name: docker-compose down
         run: RAILS_ENV=production docker-compose down
