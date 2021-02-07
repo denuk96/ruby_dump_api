@@ -29,6 +29,6 @@ jobs:
         run: git pull https://github.com/denuk96/ruby_dump_api.git
          
       - name: docker-compose down
-        run: docker-compose down
+        run: RAILS_ENV=production docker-compose down
       - name: docker-compose up -d
-        run: docker-compose up -d
+        run: RAILS_ENV=production docker-compose up -d
