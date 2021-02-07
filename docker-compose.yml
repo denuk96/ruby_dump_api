@@ -1,4 +1,4 @@
-version: "3.4"
+version: "3.8"
 
 services:
   app:
@@ -20,6 +20,14 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  web:
+    build:
+      context: ""
+      dockerfile: web/Dockerfile
+    depends_on:
+      - app
+    ports:
+      - 80:80
 volumes:
   gem_cache:
   db_data:
