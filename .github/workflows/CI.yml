@@ -27,8 +27,8 @@ jobs:
 
       - name: pull master
         run: https://github.com/denuk96/ruby_dump_api.git
-        
+         
       - name: docker-compose down
         run: docker-compose down
       - name: docker-compose up -d
-      - name: docker-compose up -d
+        run: docker-compose up -d
