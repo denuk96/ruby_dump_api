@@ -97,4 +97,9 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+
+  # caching
+  config.action_controller.perform_caching = true
+  config.cache_store = :redis_cache_store, { driver: :hiredis, url: ENV['REDIS_URL'] }
 end
