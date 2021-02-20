@@ -30,5 +30,7 @@ jobs:
          
       - name: docker-compose down
         run: RAILS_ENV=production docker-compose down
+      - name: docker-compose build
+        run: RAILS_ENV=production docker-compose build
       - name: docker-compose up -d
         run: RAILS_ENV=production docker-compose up -d
