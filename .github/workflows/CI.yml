@@ -22,9 +22,14 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: fix
+        run: sudo chown -R $USER:$USER /home/ubuntu/actions-runner/project_folder/ruby_dump_api
+      - uses: webfactory/ssh-agent@v0.5.0
+        with:
+            ssh-private-key: ${{ secrets.SSH_KEY }}
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
+      
       - name: set env vars
         run: cp /home/ubuntu/ruby_dump_vars/.env .env
          
