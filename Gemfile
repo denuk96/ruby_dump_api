@@ -16,6 +16,10 @@ gem "sidekiq-cron", "~> 1.2"
 gem "rswag"
 # == permissions control ==
 gem "cancancan"
+# == uploader ==
+gem 'carrierwave', '~> 2.0'
+gem 'mini_magick'
+gem 'fog-aws' # upload to s3
 # == other ==
 gem "active_model_serializers", "~> 0.10.0"
 gem "bcrypt", "~> 3.1.7"
