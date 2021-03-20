@@ -5,10 +5,12 @@ CarrierWave.configure do |config|
     provider: "AWS",
     aws_access_key_id: ENV["AWS_ACCESS_KEY_ID"],
     aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
-    region: "eu-central-1" # Tokyo
+    region: ENV["S3_REGION"],
   }
   config.fog_directory = ENV["S3_BUCKET_NAME"]
   config.storage = :fog
+  config.asset_host = ENV["S3_HOST"]
+  config.fog_public = false
   # else
   #   config.storage = :file
   #   config.enable_processing = Rails.env.development?

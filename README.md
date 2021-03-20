@@ -18,7 +18,7 @@
 `sudo RAILS_ENV=development docker-compose up`
 <br>
 In case you have migrations:
-`RAILS_ENV=development sudo docker-compose up | RAILS_ENV=development sudo docker-compose exec app rake db:migrate`
+`RAILS_ENV=development sudo docker-compose exec app rake db:migrate`
 
 ##### to stop
 `sudo RAILS_ENV=development docker-compose down` or `ctrl + c`
