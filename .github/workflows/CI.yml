@@ -40,5 +40,5 @@ jobs:
       - name: docker-compose up -d
         run: RAILS_ENV=production docker-compose up -d
       - name: run migrations
-        run: RAILS_ENV=production docker-compose exec app bundle exec rake db:migrate
+        run: RAILS_ENV=production docker-compose exec -d app bundle exec rake db:migrate
 
