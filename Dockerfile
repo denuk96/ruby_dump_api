@@ -31,6 +31,9 @@ RUN gem install bundler -v 2.1.4
 
 WORKDIR /app
 
+# fix mimemagic license issues
+ADD vendor/gems/mimemagic /app/vendor/gems/mimemagic
+
 COPY Gemfile Gemfile.lock ./
 RUN bundle config build.nokogiri --use-system-libraries
 RUN bundle check || bundle install

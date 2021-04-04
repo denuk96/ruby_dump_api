@@ -27,9 +27,8 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "jwt"
 gem "rack-cors"
 gem "rails_admin", "~> 2.0"
+gem "mimemagic", "0.3.5", path: "vendor/gems/mimemagic" # fix license issues
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
