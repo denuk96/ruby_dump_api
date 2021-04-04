@@ -4,7 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  body        :text
-#  pictures    :text
+#  picture    :text
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -17,7 +17,7 @@
 #  index_posts_on_user_id      (user_id)
 #
 class Post < ApplicationRecord
-  mount_uploader :pictures, ImageUploader
+  mount_uploader :picture, ImageUploader
   belongs_to :category, optional: true
   belongs_to :user
 

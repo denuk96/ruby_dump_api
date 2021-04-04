@@ -4,7 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  body        :text
-#  pictures    :text
+#  picture    :text
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -17,7 +17,7 @@
 #  index_posts_on_user_id      (user_id)
 #
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :title, :body, :category_id, :user_id
+  attributes :id, :title, :body, :category_id, :user_id, :picture
   # belongs_to :user, serializer: UserSerializer
   # belongs_to :category, serializer: CategorySerializer
 end
