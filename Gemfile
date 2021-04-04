@@ -4,6 +4,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.2"
 gem "rails", "~> 6.1"
 
+# == admin panel ==
+gem "rails_admin", "~> 2.0"
 # == default ==
 gem "pg", "~> 1.2", ">= 1.2.3"
 gem "puma", "~> 5.0"
@@ -26,7 +28,6 @@ gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.4.4", require: false
 gem "jwt"
 gem "rack-cors"
-gem "rails_admin", "~> 2.0"
 gem "mimemagic", "0.3.5", path: "vendor/gems/mimemagic" # fix license issues
 
 group :development, :test do
