@@ -25,7 +25,8 @@ RUN apk add --update --no-cache \
       pkgconfig \
       postgresql-dev \
       tzdata \
-      imagemagick
+      imagemagick \
+      rubygems
 
 RUN gem install bundler -v 2.1.4
 
@@ -37,6 +38,7 @@ ADD vendor/gems/mimemagic /app/vendor/gems/mimemagic
 COPY Gemfile Gemfile.lock ./
 RUN bundle config build.nokogiri --use-system-libraries
 RUN bundle check || bundle install
+RUN bundle update
 
 COPY . ./
 
