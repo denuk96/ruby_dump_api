@@ -25,8 +25,7 @@ RUN apk add --update --no-cache \
       pkgconfig \
       postgresql-dev \
       tzdata \
-      imagemagick \
-      rubygems
+      imagemagick
 
 RUN gem install bundler -v 2.1.4
 
@@ -39,6 +38,7 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle config build.nokogiri --use-system-libraries
 RUN bundle check || bundle install
 RUN bundle update
+RUN spring stop
 
 COPY . ./
 

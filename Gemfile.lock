@@ -316,6 +316,8 @@ GEM
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.0)
       ffi (~> 1.12)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -364,7 +366,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   annotate
   bcrypt (~> 3.1.7)
-  bootsnap (>= 1.4.4)
+  bootsnap (>= 1.4.2)
   byebug
   cancancan
   carrierwave (~> 2.0)
@@ -388,6 +390,7 @@ DEPENDENCIES
   rubocop
   rubocop-performance
   rubocop-rails
+  sass-rails (>= 6)
   sidekiq (~> 5.2)
   sidekiq-cron (~> 1.2)
   spring
